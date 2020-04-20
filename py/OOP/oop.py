@@ -19,4 +19,33 @@ Is capacity allocated differently depending on what type of vehicle enters the l
 Pricing
 Are there different rates for different times of day? How will this be handled?
 Is there a discount for purchasing a longer total time?
+
+++++++++
+Nouns(Classes) : Payments, Capacity, Vehicles, Pricing
+Adverbs(Attributes):  
+Payments
+    vehicles details
+    channels: cash, card, e-transfer
+    amount: 
+    reciever
+Capacity:
+    total_lots
+    current_parked_lots
+Vehicles:
+    VIN
+    color
+    license
+    brand
+    Type
+Pricing:
+    duration:
+    price_per_durations:
+
+Methods:
+Vehicles:
+    drive_in
+    drive_out
+Relationships
+vehicle car 
+
 """
