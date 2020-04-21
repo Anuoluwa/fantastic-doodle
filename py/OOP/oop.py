@@ -21,16 +21,18 @@ Are there different rates for different times of day? How will this be handled?
 Is there a discount for purchasing a longer total time?
 
 ++++++++
-Nouns(Classes) : Payments, Capacity, Vehicles, Pricing
+Nouns(Classes) : User, Payments, Capacity, Vehicles, Pricing
 Adverbs(Attributes):  
 Payments
-    vehicles details
+    vehicles details()
     channels: cash, card, e-transfer
     amount: 
-    reciever
+
 Capacity:
     total_lots
-    current_parked_lots
+    entry_time
+    exit_time
+
 Vehicles:
     VIN
     color
@@ -40,6 +42,7 @@ Vehicles:
 Pricing:
     duration:
     price_per_durations:
+    Capacity()
 
 Methods:
 Vehicles:
@@ -48,4 +51,57 @@ Vehicles:
 Relationships
 vehicle car 
 
+
 """
+
+from datetime import datetime
+
+class User:
+    def __init__(self, name, phone):
+        self.name = name
+        self.phone = phone
+
+
+class Staff(User):
+    def __init__(self, name, phone):
+        super().__init__(name, phone)
+        self.pricing = Pricing.rate_per_min * (Capacity.entry_time - Capacity.exit_time)
+        self.channel = ['Card', 'Cash']
+    
+    def create_park_lot(self,  total_lots):
+        capacity = Capacity(total_lots, self, self)
+
+
+    def get_vehicle_details(self, license, color, maker, brand):
+        vehicle = Vehicle(self, license, color, maker, brand)
+
+class Driver(User):
+    def __init__(self, name, phone):
+        super().__init__(name, phone)
+        self.park_lot = Capacity.total_lots - 1
+
+    def park(self, lot_number,  capacity):
+        lot_number = Capacity.total_lots [-1]
+
+
+class Capacity:
+    def __init__(self, total_lots, entry_time, exit_time):
+        self.total_lots = total_lots
+        self.entry_time = datetime.now()
+        self.exit_time = datetime.now()
+
+class Vehicle:
+    def __init__(self, license, color, maker, brand):
+        self.license = license
+        self.color = color
+        self.maker = maker
+        self.brand = brand
+
+class Pricing:
+    def  __init__(self, rate_per_min):
+        self.rate_per_min = rate_per_min
+
+
+class Payment:
+    def __init__(self, channel):
+        self.channel = channel
