@@ -65,8 +65,7 @@ class User:
 class Staff(User):
     def __init__(self, name, phone):
         super().__init__(name, phone)
-        self.pricing = Pricing.rate_per_min * (Capacity.entry_time - Capacity.exit_time)
-        self.channel = ['Card', 'Cash']
+        self.park_lot = 0
     
     def create_park_lot(self,  total_lots):
         capacity = Capacity(total_lots, self, self)
@@ -75,20 +74,25 @@ class Staff(User):
     def get_vehicle_details(self, license, color, maker, brand):
         vehicle = Vehicle(self, license, color, maker, brand)
 
+
+
 class Driver(User):
     def __init__(self, name, phone):
         super().__init__(name, phone)
-        self.park_lot = Capacity.total_lots - 1
 
     def park(self, lot_number,  capacity):
-        lot_number = Capacity.total_lots [-1]
+
+
+    def exit(self):
+
+
+    def payment(self)
+        
 
 
 class Capacity:
-    def __init__(self, total_lots, entry_time, exit_time):
+    def __init__(self, total_lots=0):
         self.total_lots = total_lots
-        self.entry_time = datetime.now()
-        self.exit_time = datetime.now()
 
 class Vehicle:
     def __init__(self, license, color, maker, brand):
@@ -96,12 +100,23 @@ class Vehicle:
         self.color = color
         self.maker = maker
         self.brand = brand
+    
+    def get_vehicle(self):
+        return  
 
 class Pricing:
-    def  __init__(self, rate_per_min):
+    def  __init__(self, rate_per_min, entry_time, exit_time):
         self.rate_per_min = rate_per_min
+        self.entry_time = entry_time
+        self.exit_time = exit_time
+
+
+    def calculate_amount(self):
+        total_time = entry_time - exit_time
+        amount = rate_per_min * total_time
 
 
 class Payment:
     def __init__(self, channel):
         self.channel = channel
+        self.amount = 0
