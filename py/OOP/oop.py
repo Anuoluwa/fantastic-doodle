@@ -57,45 +57,21 @@ vehicle car
 from datetime import datetime
 
 class User:
-    def __init__(self, name, phone):
+    def __init__(self, name,):
         self.name = name
         self.phone = phone
 
-
-class Staff(User):
-    def __init__(self, name, phone):
-        super().__init__(name, phone)
-        self.park_lot = 0
-    
-    def create_park_lot(self,  total_lots):
-        capacity = Capacity(total_lots, self, self)
-
-
-    def get_vehicle_details(self, license, color, maker, brand):
-        vehicle = Vehicle(self, license, color, maker, brand)
-
-
-
-class Driver(User):
-    def __init__(self, name, phone):
-        super().__init__(name, phone)
-
-    def park(self, lot_number,  capacity):
-
-
-    def exit(self):
-
-
-    def payment(self)
-        
-
-
 class Capacity:
-    def __init__(self, total_lots=0):
+    def __init__(self, total_lots):
         self.total_lots = total_lots
 
+class Payment:
+    def __init__(self, channel):
+        self.channel = channel
+        self.amount = 0
+
 class Vehicle:
-    def __init__(self, license, color, maker, brand):
+    def __init__(self, vehicle_license, color, maker, brand):
         self.license = license
         self.color = color
         self.maker = maker
@@ -103,20 +79,33 @@ class Vehicle:
     
     def get_vehicle(self):
         return  
+class Staff(User):
+    def __init__(self, name, phone):
+        super().__init__(name, phone)
+        self.park_lot = 0
+        self.vehicle = []
+    
+    def create_park_lot(total_lots, self):
+        park_lot = Capacity(total_lots)
 
+
+    def get_vehicle_details(self, vehicle_license, color, maker, brand):
+        vehicle = Vehicle(vehicle_license, color, maker, brand, self)
+
+
+
+class Driver(User):
+    def __init__(self, name, phone):
+        super().__init__(name, phone)
+
+    
 class Pricing:
     def  __init__(self, rate_per_min, entry_time, exit_time):
         self.rate_per_min = rate_per_min
-        self.entry_time = entry_time
-        self.exit_time = exit_time
+        self.entry_time = datetime.now()
+        self.exit_time = datetime.now()
 
 
     def calculate_amount(self):
         total_time = entry_time - exit_time
         amount = rate_per_min * total_time
-
-
-class Payment:
-    def __init__(self, channel):
-        self.channel = channel
-        self.amount = 0
