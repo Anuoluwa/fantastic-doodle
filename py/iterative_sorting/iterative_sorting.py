@@ -24,3 +24,30 @@ def selection_sort( arr ):
         # TO-DO: swap
 
     return arr
+
+print(selection_sort(arr))
+
+
+"""
+Bubble sort
+"""
+
+# TO-DO:  implement the Bubble Sort function below
+def bubble_sort( arr ):
+    # set a variable to hosd swaps occured
+    swaps_have_occured = True
+    # loop while swaps have occured
+    while swaps_have_occured:
+        # set the swaps occured to false
+        swaps_have_occured = False
+        # inner loop to iterate over the list (loop through you array)
+        for i in range(0, len(arr) - 1):
+            # check if element is in wrong position
+            if arr[i] > arr[i + 1]:
+                # swap elements
+                arr[i], arr[i + 1] = arr[i + 1], arr[i]
+                # set swaps occured to true
+                swaps_have_occured = True
+    return arr
+
+print(bubble_sort(arr))
