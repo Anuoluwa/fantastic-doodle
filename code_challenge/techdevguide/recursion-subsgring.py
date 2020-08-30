@@ -1,4 +1,4 @@
-string = input("Enter a word: ")
+string = input("Please enter a word: ")
 substring = input("Please enter the substring you wish to find: ")
 replacement = input("Please enter a string to replace the give substring: ")
 
